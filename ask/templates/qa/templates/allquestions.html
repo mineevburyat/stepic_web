@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>All Questions ordered by news</title>
+</head>
+<body>
+    <dev>
+        <table>
+        {% for question in page.object_list %}
+        <tr>
+	    <td> <a href="{% url 'question_detail' question.pk  %}">{{ question.title }}</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </dev>
+    <dev>
+        <table>
+	    <tr>
+                <td>{% if page.has_previos %}<a href="{{ nav }}{{ prev }}">previus</a>{% endif %}</td>
+                <td>{{ page.number }}</td>
+                <td>{% if page.has_nex %}<a href="{{ nav }}{{ next }}">next</a>{% endif %}</td>
+            </tr>
+        </table>
+    </dev>
+</body>
+</html>
