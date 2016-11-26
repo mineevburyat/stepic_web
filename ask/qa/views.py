@@ -81,9 +81,11 @@ def popular(request):
     return render(request, 'qa/popular.html', {'page': page, 'next': pagenum + 1, 'prev': pagenum - 1, 'nav': '/?page='})
 
 #/question/n/
-@require_GET
 def question(request, pk):
-    q = get_object_or_404(Question, pk=pk)
-    answers = Answer.objects.filter(question=q)
-    answerform = AnswerForm()
-    return render(request, 'qa/question_details.html', {'question': q, 'answers': answers, 'form': answerform})
+    if request.method == "POST":
+        return HttpResponse('OK')
+    else:
+        q = get_object_or_404(Question, pk=pk)
+        answers = Answer.objects.filter(question=q)
+        answerform = AnswerForm()
+        return render(request, 'qa/question_details.html', {'question': q, 'answers': answers, 'form': answerform})
