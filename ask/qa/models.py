@@ -16,21 +16,21 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(to=User)
-    likes = models.ManyToManyField(to=User, related_name='question_like_user')
+    author = models.ForeignKey(to=User, null=True, blank=True)
+    likes = models.ManyToManyField(to=User, related_name='question_like_user', null=True, blank=True)
 # through='Likes')
     objects = QuestionManager()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
-    author = models.ForeignKey(to=User)
+    author = models.ForeignKey(to=User, null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.text
 
 #class Likes(model.Model):

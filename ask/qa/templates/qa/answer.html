@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Answer on question</title>
+</head>
+<body>
+    <dev>
+        <form name="answer" method="post" action="/answer/">
+            {% csrf_token %}
+            {{ f.as_p }}
+            <input type="submit" value="send">
+        </form>
+    </dev>
+</body>
+</html>

@@ -16,5 +16,14 @@
         {% endfor %}
         </ul>
     </div>
+    <div>
+        <h3>Ответить:</h3>
+        <form name="answer" method="post" action="/answer/">
+            {% csrf_token %}
+            <textarea name="text" cols="40" rows="5"></textarea>
+            <input name="question" value="{{ question.id }}" hidden>
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
 </body>
 </html>
