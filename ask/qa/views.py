@@ -82,10 +82,17 @@ def popular(request):
 
 #/question/n/
 def question(request, pk):
+    q = get_object_or_404(Question, pk=pk)
     if request.method == "POST":
-        return HttpResponse('OK')
+        answform = AnswerForm(request.POST)
+        answform['question'] = q
+        if answform.is_valid():
+            answeritem = answform.save()
+        return HttpResponseRedirect('/question/'+str(q.id))
     else:
-        q = get_object_or_404(Question, pk=pk)
         answers = Answer.objects.filter(question=q)
         answerform = AnswerForm()
         return render(request, 'qa/question_details.html', {'question': q, 'answers': answers, 'form': answerform})
+
+def signup(request):
+    return render(request, 'qa/signup.html', {})
