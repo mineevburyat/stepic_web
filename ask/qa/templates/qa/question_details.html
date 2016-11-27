@@ -18,7 +18,7 @@
     </div>
     <div>
         <h3>Ответить:</h3>
-        <form name="answer" method="post" action="/answer/">
+        <form name="answer" method="post" action="{% url 'question_detail' question.id %} ">
             {% csrf_token %}
             <textarea name="text" cols="40" rows="5"></textarea>
             <input name="question" value="{{ question.id }}" hidden>

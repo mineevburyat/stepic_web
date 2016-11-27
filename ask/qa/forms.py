@@ -6,7 +6,7 @@ class AskForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
 
     def clean(self):
-        pass
+        return self.cleaned_data
 
     def save(self):
         ask = Question(**self.cleaned_data)
@@ -18,7 +18,7 @@ class AnswerForm(forms.Form):
     question = forms.ModelChoiceField(Question.objects.all())
 
     def clean(self):
-        pass
+        return self.cleaned_data
 
     def save(self):
         answer = Answer(**self.cleaned_data)

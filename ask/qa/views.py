@@ -14,7 +14,7 @@ def ask(request):
         askf = AskForm(request.POST)
         if askf.is_valid():
             question = askf.save()
-            return HttpResponseRedirect('/question/' + str(question.id))
+            return HttpResponseRedirect('/question/' + str(question.id) + '/')
     else:
         askf = AskForm()
     return render(request, 'qa/ask.html', {'form':askf})
@@ -85,10 +85,9 @@ def question(request, pk):
     q = get_object_or_404(Question, pk=pk)
     if request.method == "POST":
         answform = AnswerForm(request.POST)
-        answform['question'] = q
         if answform.is_valid():
-            answeritem = answform.save()
-        return HttpResponseRedirect('/question/'+str(q.id))
+            answform.save()
+        return HttpResponseRedirect('/question/'+str(q.id)+'/')
     else:
         answers = Answer.objects.filter(question=q)
         answerform = AnswerForm()
